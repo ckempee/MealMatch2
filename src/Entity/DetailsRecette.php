@@ -19,6 +19,14 @@ class DetailsRecette
     #[ORM\Column(length: 50)]
     private ?string $mesure = null;
 
+    #[ORM\ManyToOne(inversedBy: 'details')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Recette $recette = null;
+
+    #[ORM\ManyToOne(inversedBy: 'details')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Ingredients $ingredients = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +52,30 @@ class DetailsRecette
     public function setMesure(string $mesure): self
     {
         $this->mesure = $mesure;
+
+        return $this;
+    }
+
+    public function getRecette(): ?Recette
+    {
+        return $this->recette;
+    }
+
+    public function setRecette(?Recette $recette): self
+    {
+        $this->recette = $recette;
+
+        return $this;
+    }
+
+    public function getIngredients(): ?Ingredients
+    {
+        return $this->ingredients;
+    }
+
+    public function setIngredients(?Ingredients $ingredients): self
+    {
+        $this->ingredients = $ingredients;
 
         return $this;
     }

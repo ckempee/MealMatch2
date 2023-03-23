@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RecetteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,6 +33,14 @@ class Recette
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
+
+    #[ORM\OneToMany(mappedBy: 'recette', targetEntity: DetailsRecette::class, orphanRemoval: true)]
+    private Collection $details;
+
+    public function __construct()
+    {
+        $this->details = new ArrayCollection();
+    }
 
     
 
@@ -107,6 +117,36 @@ class Recette
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DetailsRecette>
+     */
+    public function getDetails(): Collection
+    {
+        return $this->details;
+    }
+
+    public function addDetail(DetailsRecette $detail): self
+    {
+        if (!$this->details->contains($detail)) {
+            $this->details->add($detail);
+            $detail->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetail(DetailsRecette $detail): self
+    {
+        if ($this->details->removeElement($detail)) {
+            // set the owning side to null (unless already changed)
+            if ($detail->getRecette() === $this) {
+                $detail->setRecette(null);
+            }
+        }
 
         return $this;
     }
