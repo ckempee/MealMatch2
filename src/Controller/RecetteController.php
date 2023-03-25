@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Recette;
+use App\Form\RecetteType;
 use App\Repository\RecetteRepository;
-
-
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +31,16 @@ class RecetteController extends AbstractController
         //je les envois à la vue
         return $this->render('recette/index.html.twig', [
             'recettes'=>$recettes
+        ]);
+    }
+
+    #[Route('/recette/creation', name: 'recette.creation')]
+    public function new(): Response
+    {
+        $recette=new Recette();
+        $form=$this->createForm(RecetteType::class, $recette);
+        return $this->render('recette/new.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }
