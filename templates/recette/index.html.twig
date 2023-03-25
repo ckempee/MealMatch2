@@ -10,9 +10,21 @@
 {% endblock %}
 {% block body %}
 
+<div class="container mt-4">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success mt-4">
+				{{ message }}
+			</div>
+		{% endfor %}
+
+
 <div class="container">
 <div class="example-wrapper">
     <h1>Mes Recettes</h1>
+
+			<a href="{{ path('recette.creation') }}" class="btn btn-primary">
+				Créer une recette</a>
+
     <table class="table table-hover">
   <thead>
     <tr>
@@ -20,6 +32,9 @@
       <th scope="col">Titre</th>
       <th scope="col">Nombre de Personnes</th>
       <th scope="col">Date de Création</th>
+      <th scope="col">Edition</th>
+			<th scope="col">Suppresion</th>
+
     </tr>
   </thead>
   <tbody>
@@ -29,6 +44,13 @@
       <td>{{recette.titre}}</td>
       <td>{{recette.nbPersonne}}</td>
       <td>{{recette.createdAt|date('d/m/Y')}}</td>
+      <td>
+								<a href="{{ path('recette.edit', { id: recette.id }) }}" class="btn btn-info">Modifier</a>
+							</td>
+							<td>
+								<a href="{{ path('recette.delete', { id: recette.id }) }}" class="btn btn-warning">Supprimer</a>
+							</td>
+
     </tr>
     {%endfor%}
   </tbody>

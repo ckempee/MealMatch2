@@ -36,7 +36,7 @@ class Recette
     
     #[ORM\Column]
     #[Assert\NotNull()]
-    #[Assert\Length(min: 2, max: 50)]
+    #[Assert\Length(min: 1, max: 50)]
     
     private ?int $nbPersonne = null;
     

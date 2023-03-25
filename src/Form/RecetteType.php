@@ -10,6 +10,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class RecetteType extends AbstractType
 {
@@ -20,9 +24,9 @@ class RecetteType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'minlength' => '2',
-                    'maxlength' => '50'
+                    'maxlength' => '255'
                 ],
-                'label' => 'Nom',
+                'label' => 'Titre',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
@@ -32,12 +36,93 @@ class RecetteType extends AbstractType
                 ]
 
             ])
-            ->add('dureePreparation')
-            ->add('tempsCuisson')
-            ->add('nbPersonne')
-            ->add('photo')
-            ->add('description')
+            ->add('dureePreparation',  TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlength' => '2',
+                    'maxlength' => '50'
+                ],
+                'label' => 'Duree de Preparation',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\Length(['min' => 2, 'max' => 50]),
+                    new Assert\NotBlank()
+                ]])
+
+            ->add('tempsCuisson',  TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlength' => '2',
+                    'maxlength' => '50'
+                ],
+                'label' => 'Temps de cuisson',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\Length(['min' => 2, 'max' => 50]),
+                    new Assert\NotBlank()
+                ]])
+
+            ->add('nbPersonne',IntegerType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'min' => 1,
+                    'max' => 50
+                ],
+                'required' => false,
+                'label' => 'Nombre de personnes',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\Positive(),
+                    new Assert\LessThan(51)
+                ]
+            ])
+
+
+
+            ->add('photo', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlength' => '2',
+                    'maxlength' => '255'
+                ],
+                'label' => 'Photo',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\Length(['min' => 2, 'max' => 255]),
+                    new Assert\NotBlank()
+                ]
+
+            ])
+            ->add('description', TextareaType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'min' => 1,
+                    'max' => 5
+                ],
+                'label' => 'Description',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank()
+                ]
+            ])    
             
+            ->add('submit', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary mt-4'
+                ],
+                'label' => 'Ajouter une recette'
+            ]);
+
         ;
     }
 
