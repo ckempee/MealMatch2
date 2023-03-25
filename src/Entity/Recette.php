@@ -63,6 +63,15 @@ class Recette
     #[ORM\OneToMany(mappedBy: 'recette', targetEntity: DetailsRecette::class, orphanRemoval: true)]
     private Collection $details;
 
+    #[ORM\ManyToMany(targetEntity: Categories::class, mappedBy: 'recette')]
+    private Collection $categories;
+
+    #[ORM\ManyToMany(targetEntity: Regime::class, mappedBy: 'recette')]
+    private Collection $regimes;
+
+    #[ORM\ManyToMany(targetEntity: Saison::class, mappedBy: 'recette')]
+    private Collection $saisons;
+
     
 
 
@@ -71,6 +80,9 @@ class Recette
         $this->details = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable;
         $this->updatedAt= new \DateTimeImmutable;
+        $this->categories = new ArrayCollection();
+        $this->regimes = new ArrayCollection();
+        $this->saisons = new ArrayCollection();
     }
 
     #[ORM\PrePersist()]
@@ -207,6 +219,87 @@ class Recette
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Categories>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Categories $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->addRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categories $category): self
+    {
+        if ($this->categories->removeElement($category)) {
+            $category->removeRecette($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Regime>
+     */
+    public function getRegimes(): Collection
+    {
+        return $this->regimes;
+    }
+
+    public function addRegime(Regime $regime): self
+    {
+        if (!$this->regimes->contains($regime)) {
+            $this->regimes->add($regime);
+            $regime->addRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegime(Regime $regime): self
+    {
+        if ($this->regimes->removeElement($regime)) {
+            $regime->removeRecette($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Saison>
+     */
+    public function getSaisons(): Collection
+    {
+        return $this->saisons;
+    }
+
+    public function addSaison(Saison $saison): self
+    {
+        if (!$this->saisons->contains($saison)) {
+            $this->saisons->add($saison);
+            $saison->addRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSaison(Saison $saison): self
+    {
+        if ($this->saisons->removeElement($saison)) {
+            $saison->removeRecette($this);
+        }
 
         return $this;
     }
