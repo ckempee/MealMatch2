@@ -10,9 +10,9 @@ class RecetteFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        
+        for ($i = 0; $i < 10; $i++) {
             $recette = new Recette();
-            // créer un hydrate
+            // créer un hydrate!!!
             $recette->setTitre("pizza" );
             $recette->setDureePreparation("25min" );
             $recette->setTempsCuisson("15min" );
@@ -21,6 +21,7 @@ class RecetteFixtures extends Fixture
             $recette->setDescription("Description, description, description" );
 
             $manager->persist($recette);
+        }
            
            
           

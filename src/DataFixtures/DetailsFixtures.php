@@ -23,7 +23,7 @@ class DetailsFixtures extends Fixture implements DependentFixtureInterface
     // créer des DetailsRecette
     for ($i = 0; $i < 10; $i++) {
         // choisir une recette+un ingrédients au hasard
-        $recetteChoisie = $recette[0];
+        $recetteChoisie = $recette[rand(0, count($recette) - 1)];
         $ingredientChoisi = $ingredient[rand(0, count($ingredient) - 1)];
 
         $detailRecette = new DetailsRecette();
