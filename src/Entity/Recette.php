@@ -72,6 +72,9 @@ class Recette
     #[ORM\ManyToMany(targetEntity: Saison::class, mappedBy: 'recette')]
     private Collection $saisons;
 
+    #[ORM\ManyToOne(inversedBy: 'recettes')]
+    private ?User $user = null;
+
     
 
 
@@ -300,6 +303,18 @@ class Recette
         if ($this->saisons->removeElement($saison)) {
             $saison->removeRecette($this);
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

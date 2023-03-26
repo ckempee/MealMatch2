@@ -5,15 +5,17 @@ namespace App\Form;
 use Assert\Length;
 use Assert\NotBlank;
 use App\Entity\Recette;
+use App\Entity\Categories;
+use App\Repository\CategoriesRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class RecetteType extends AbstractType
 {
@@ -114,7 +116,25 @@ class RecetteType extends AbstractType
                 'constraints' => [
                     new Assert\NotBlank()
                 ]
-            ])    
+  ])    
+                ->add('categories', EntityType::class, [
+                    'class' => Categories::class,
+                    'query_builder' => function (CategoriesRepository $r) {
+                        return $r->createQueryBuilder('i');
+                            
+                            
+                           
+                    },
+                    'label' => 'Les catégories',
+                    'label_attr' => [
+                        'class' => 'form-label mt-4'
+                    ],
+                    'choice_label' => 'nom',
+                    'multiple' => true,
+                    'expanded' => true,
+                ])
+    
+          
             
             ->add('submit', SubmitType::class, [
                 'attr' => [

@@ -25,7 +25,7 @@ class RecetteController extends AbstractController
     {
         //je récupère toutes les recettes
         $recettes=$paginator->paginate(
-            $repository->findAll(),
+            $repository->findBy(['user' => $this->getUser()]),
             $request->query->getInt('page', 1),
             5
         );
@@ -48,6 +48,7 @@ class RecetteController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) { 
             $recette=$form->getdata();
+            $recette->setUser($this->getUser());
             $manage->persist($recette);
 
             $manage->flush();

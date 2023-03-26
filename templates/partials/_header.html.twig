@@ -20,20 +20,37 @@
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>
         </li>
-        <li class="nav-item dropdown">
+        
+      </ul>
+      <form class="d-flex">
+      <ul class="navbar-nav me-auto">
+					{% if app.user %}
+          <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="{{path('recette.index')}}">Mes recettes</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
+            <a class="dropdown-item" href="{{path('recette.creation')}}">Ajouter une recette</a>
+            <a class="dropdown-item" href="{{path('app_logout')}}">Déconnexion</a>
+            
           </div>
         </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-sm-2" type="search" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        {% else %}
+						<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{path('app_login')}}">Connexion</a>
+            <a class="dropdown-item" href="{{path('app_register')}}">Inscription</a>
+            <a class="dropdown-item" href="#"></a>
+            
+          </div>
+        </li>
+					{% endif %}
+        </ul>
+
+        </div>
+
+
+        
       </form>
     </div>
   </div>
