@@ -18,12 +18,14 @@ class Categories
     #[ORM\Column(length: 50)]
     private ?string $nom = null;
 
-    #[ORM\ManyToMany(targetEntity: Recette::class, inversedBy: 'categories')]
-    private Collection $recette;
+    #[ORM\OneToMany(mappedBy: 'categories', targetEntity: Recette::class)]
+    private Collection $recettes;
+
+   
 
     public function __construct()
     {
-        $this->recette = new ArrayCollection();
+        $this->recettes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -46,15 +48,16 @@ class Categories
     /**
      * @return Collection<int, Recette>
      */
-    public function getRecette(): Collection
+    public function getRecettes(): Collection
     {
-        return $this->recette;
+        return $this->recettes;
     }
 
     public function addRecette(Recette $recette): self
     {
-        if (!$this->recette->contains($recette)) {
-            $this->recette->add($recette);
+        if (!$this->recettes->contains($recette)) {
+            $this->recettes->add($recette);
+            $recette->setCategories($this);
         }
 
         return $this;
@@ -62,8 +65,15 @@ class Categories
 
     public function removeRecette(Recette $recette): self
     {
-        $this->recette->removeElement($recette);
+        if ($this->recettes->removeElement($recette)) {
+            // set the owning side to null (unless already changed)
+            if ($recette->getCategories() === $this) {
+                $recette->setCategories(null);
+            }
+        }
 
         return $this;
     }
+
+    
 }

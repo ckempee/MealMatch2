@@ -119,19 +119,9 @@ class RecetteType extends AbstractType
   ])    
                 ->add('categories', EntityType::class, [
                     'class' => Categories::class,
-                    'query_builder' => function (CategoriesRepository $r) {
-                        return $r->createQueryBuilder('i');
-                            
-                            
-                           
-                    },
-                    'label' => 'Les catégories',
-                    'label_attr' => [
-                        'class' => 'form-label mt-4'
-                    ],
+                    
                     'choice_label' => 'nom',
-                    'multiple' => true,
-                    'expanded' => true,
+                    
                 ])
     
           

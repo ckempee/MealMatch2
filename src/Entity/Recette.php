@@ -63,9 +63,7 @@ class Recette
     #[ORM\OneToMany(mappedBy: 'recette', targetEntity: DetailsRecette::class, orphanRemoval: true)]
     private Collection $details;
 
-    #[ORM\ManyToMany(targetEntity: Categories::class, mappedBy: 'recette')]
-    private Collection $categories;
-
+    
     #[ORM\ManyToMany(targetEntity: Regime::class, mappedBy: 'recette')]
     private Collection $regimes;
 
@@ -75,6 +73,9 @@ class Recette
     #[ORM\ManyToOne(inversedBy: 'recettes')]
     private ?User $user = null;
 
+    #[ORM\ManyToOne(inversedBy: 'recettes')]
+    private ?Categories $categories = null;
+
     
 
 
@@ -83,7 +84,7 @@ class Recette
         $this->details = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable;
         $this->updatedAt= new \DateTimeImmutable;
-        $this->categories = new ArrayCollection();
+      
         $this->regimes = new ArrayCollection();
         $this->saisons = new ArrayCollection();
     }
@@ -226,32 +227,7 @@ class Recette
         return $this;
     }
 
-    /**
-     * @return Collection<int, Categories>
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Categories $category): self
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
-            $category->addRecette($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Categories $category): self
-    {
-        if ($this->categories->removeElement($category)) {
-            $category->removeRecette($this);
-        }
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, Regime>
@@ -315,6 +291,18 @@ class Recette
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCategories(): ?Categories
+    {
+        return $this->categories;
+    }
+
+    public function setCategories(?Categories $categories): self
+    {
+        $this->categories = $categories;
 
         return $this;
     }
