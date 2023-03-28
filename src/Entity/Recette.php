@@ -76,7 +76,6 @@ class Recette
     #[ORM\ManyToOne(inversedBy: 'recettes')]
     private ?Categories $categories = null;
 
-    
 
 
     public function __construct()
