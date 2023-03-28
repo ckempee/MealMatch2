@@ -73,16 +73,17 @@
 		{# the data-index attribute is required for the JavaScript code below #}
 		
 		<ul class="details"
-			{# data-index="{{ form.details|length > 0 ? form.details|last.vars.name + 1 : 0 }}"  #}
-			data-index="1" 
+			data-index="{{ form.details|length > 0 ? form.details|last.vars.name + 1 : 0 }}"  
 			data-prototype="{{ form_widget(form.details.vars.prototype)|e('html_attr') }}">
 			{% for detail in form.details %}
 				<br>
             	<li>{{ form_row(detail.quantite) }}</li>
 				<li>{{ form_row(detail.mesure) }}</li>
 				<li>{{ form_row(detail.ingredients) }}</li>
+				
         	{% endfor %}
 		</ul>
+		<button type="button" class="add_item_link" data-collection-holder-class="details">+</button>
 
 
 			{{ form_row(form._token) }}
@@ -90,5 +91,40 @@
 		{{ form_end(form, {render_rest:false}) }}
 
 </div>
+
+{% block customJS %}
+<script>
+
+const addFormToCollection = (e) => {
+  const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+  const item = document.createElement('li');
+
+  item.innerHTML = collectionHolder
+    .dataset
+    .prototype
+    .replace(
+      /__name__/g,
+      collectionHolder.dataset.index
+    );
+
+  collectionHolder.appendChild(item);
+
+  collectionHolder.dataset.index++;
+};
+
+
+document
+  .querySelectorAll('.add_item_link')
+  .forEach(btn => {
+      btn.addEventListener("click", addFormToCollection)
+  });
+
+
+
+</script>
+
+{% endblock %}
+
 {% endblock %}
 

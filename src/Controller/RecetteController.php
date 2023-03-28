@@ -89,17 +89,16 @@ class RecetteController extends AbstractController
        
         //rajouter cette recette vide dans le formulaire
         $form=$this->createForm(RecetteType::class, $recette);
-
         $form->handleRequest($request);
         
         
         if ($form->isSubmitted() && $form->isValid()) { 
             
-            // dd($recette);
-            $recette=$form->getdata();
             $recette->setUser($this->getUser());
+            
+            
             $manage->persist($recette);
-
+            
             $manage->flush();
 
 

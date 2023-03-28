@@ -132,6 +132,7 @@ class RecetteType extends AbstractType
                     'entry_type' => DetailsRecetteType::class,
                     'entry_options' => ['label' => false],
                     'allow_add' => true,
+                    'by_reference' => false,
                 ])
           
             
