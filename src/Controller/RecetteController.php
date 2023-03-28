@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\DetailsRecette;
-use App\Entity\Ingredients;
 use App\Entity\Recette;
 use App\Form\RecetteType;
+use App\Entity\Ingredients;
+use App\Entity\DetailsRecette;
 
+use App\Form\SearchIngredientType;
 use App\Repository\RecetteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -26,34 +27,34 @@ class RecetteController extends AbstractController
     //récuperer le user!!!! 
     #[IsGranted('ROLE_USER')]
     #[Route('/recette', name: 'recette_index')]
-    public function index(RecetteRepository $repository,PaginatorInterface $paginator,Request $request): Response
+    public function index(RecetteRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
         //je récupère toutes les recettes
-        $recettes=$paginator->paginate(
+        $recettes = $paginator->paginate(
             $repository->findBy(['user' => $this->getUser()]),
             $request->query->getInt('page', 1),
             5
         );
-        
+
         //je les envois à la vue
         return $this->render('recette/index.html.twig', [
-            'recettes'=>$recettes
+            'recettes' => $recettes
         ]);
     }
 
     #[Route('/recette/public', name: 'recette_index_public')]
-    public function indexPublic(RecetteRepository $repository,PaginatorInterface $paginator,Request $request): Response
+    public function indexPublic(RecetteRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
         //je récupère toutes les recettes
-        $recettes=$paginator->paginate(
+        $recettes = $paginator->paginate(
             $repository->findPublicRecipe(null),
             $request->query->getInt('page', 1),
             5
         );
-        
+
         //je les envois à la vue
         return $this->render('recette/indexPublic.html.twig', [
-            'recettes'=>$recettes
+            'recettes' => $recettes
         ]);
     }
 
@@ -63,8 +64,8 @@ class RecetteController extends AbstractController
     public function new(Request $request, EntityManagerInterface $manage): Response
     {
         //créer une nouvelle recette vide
-        
-        $recette=new Recette();
+
+        $recette = new Recette();
 
         // $details1 = new DetailsRecette();
         // $details1->setQuantite('12');
@@ -73,9 +74,9 @@ class RecetteController extends AbstractController
         // $ing->setNom ('rizzzz');
         // $manage->persist($ing);
         // $details1->setIngredients($ing);
-        
+
         // $recette->getDetails()->add($details1);
-        
+
         // $details2 = new DetailsRecette();
         // $details2->setQuantite('5');
         // $details2->setMesure('ml');
@@ -84,21 +85,22 @@ class RecetteController extends AbstractController
         // $manage->persist($ing2);
         // $details1->setIngredients($ing2);
 
-        
+
         // $recette->getDetails()->add($details2);
-       
+
         //rajouter cette recette vide dans le formulaire
-        $form=$this->createForm(RecetteType::class, $recette);
+        $form = $this->createForm(RecetteType::class, $recette);
         $form->handleRequest($request);
-        
-        
-        if ($form->isSubmitted() && $form->isValid()) { 
-            
+
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
             $recette->setUser($this->getUser());
-            
-            
+
+
             $manage->persist($recette);
-            
+
             $manage->flush();
 
 
@@ -107,16 +109,16 @@ class RecetteController extends AbstractController
                 'Votre recette a été créé avec succès !'
             );
 
-            
+
             return $this->redirectToRoute('recette_index');
-
-
-
         }
 
-       
+            
+        $formSearch = $this->createForm(SearchIngredientType::class);
+
         return $this->render('recette/new.html.twig', [
             'form' => $form->createView(),
+            'formSearch' => $formSearch->createView(),
         ]);
     }
 
@@ -131,8 +133,8 @@ class RecetteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            $recette=$form->getData();
+
+            $recette = $form->getData();
             $manager->persist($recette);
 
             $manager->flush();
@@ -152,12 +154,12 @@ class RecetteController extends AbstractController
         ]);
     }
 
-    
+
     #[Route('/recette/suppression/{id}', 'recette.delete', methods: ['GET'])]
-   #[Security("is_granted('ROLE_USER') and user === recette.getUser()")]
+    #[Security("is_granted('ROLE_USER') and user === recette.getUser()")]
     public function delete(
         EntityManagerInterface $manager,
-       Recette $recette
+        Recette $recette
     ): Response {
         $manager->remove($recette);
         $manager->flush();
@@ -171,9 +173,11 @@ class RecetteController extends AbstractController
     }
 
     #[Route('/recette/{id}', 'recette.show', methods: ['GET', 'POST'])]
-    public function show(Recette $recette):Response {
-        return $this->render('recette/show.html.twig', [ 'recette'=>$recette]
-    );
+    public function show(Recette $recette): Response
+    {
+        return $this->render(
+            'recette/show.html.twig',
+            ['recette' => $recette]
+        );
     }
-
 }

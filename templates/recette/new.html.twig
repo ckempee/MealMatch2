@@ -2,6 +2,16 @@
 
 {% block title %}MealMatch- Nouvelle Recette{% endblock %}
 
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+{% endblock %}
+{% block stylesheet %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+
+
 {% block body %}
 <div class="container">
 <h1 class="mt-4">Nouvelle Recette</h1>
@@ -90,16 +100,22 @@
 		
 		{{ form_end(form, {render_rest:false}) }}
 
+
+{{ form_start(formSearch) }}
+{{ form_widget(formSearch) }}
+{{ form_end(formSearch) }}
+
 </div>
+
+
+
 
 {% block customJS %}
 <script>
 
 const addFormToCollection = (e) => {
   const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
-
   const item = document.createElement('li');
-
   item.innerHTML = collectionHolder
     .dataset
     .prototype
@@ -107,9 +123,7 @@ const addFormToCollection = (e) => {
       /__name__/g,
       collectionHolder.dataset.index
     );
-
   collectionHolder.appendChild(item);
-
   collectionHolder.dataset.index++;
 };
 
@@ -121,6 +135,10 @@ document
   });
 
 
+// transformer les select en select2
+$(document).ready(function() {
+	$('.select2').select2(); 
+});
 
 </script>
 
