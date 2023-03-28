@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\DetailsRecette;
+use App\Entity\Ingredients;
 use App\Entity\Recette;
 use App\Form\RecetteType;
 
@@ -23,7 +25,7 @@ class RecetteController extends AbstractController
     //l'index va me permettre de voir mes recettes
     //récuperer le user!!!! 
     #[IsGranted('ROLE_USER')]
-    #[Route('/recette', name: 'recette.index')]
+    #[Route('/recette', name: 'recette_index')]
     public function index(RecetteRepository $repository,PaginatorInterface $paginator,Request $request): Response
     {
         //je récupère toutes les recettes
@@ -39,7 +41,7 @@ class RecetteController extends AbstractController
         ]);
     }
 
-    #[Route('/recette/public', name: 'recette.index.public')]
+    #[Route('/recette/public', name: 'recette_index_public')]
     public function indexPublic(RecetteRepository $repository,PaginatorInterface $paginator,Request $request): Response
     {
         //je récupère toutes les recettes
@@ -57,17 +59,43 @@ class RecetteController extends AbstractController
 
 
     #[IsGranted('ROLE_USER')]
-    #[Route('/recette/creation', name: 'recette.creation')]
+    #[Route('/recette/creation', name: 'recette_creation')]
     public function new(Request $request, EntityManagerInterface $manage): Response
     {
         //créer une nouvelle recette vide
+        
         $recette=new Recette();
+
+        // $details1 = new DetailsRecette();
+        // $details1->setQuantite('12');
+        // $details1->setMesure('gr');
+        // $ing = new Ingredients();
+        // $ing->setNom ('rizzzz');
+        // $manage->persist($ing);
+        // $details1->setIngredients($ing);
+        
+        // $recette->getDetails()->add($details1);
+        
+        // $details2 = new DetailsRecette();
+        // $details2->setQuantite('5');
+        // $details2->setMesure('ml');
+        // $ing2 = new Ingredients();
+        // $ing2->setNom ('rizzzz');
+        // $manage->persist($ing2);
+        // $details1->setIngredients($ing2);
+
+        
+        // $recette->getDetails()->add($details2);
+       
         //rajouter cette recette vide dans le formulaire
         $form=$this->createForm(RecetteType::class, $recette);
 
         $form->handleRequest($request);
         
+        
         if ($form->isSubmitted() && $form->isValid()) { 
+            
+            // dd($recette);
             $recette=$form->getdata();
             $recette->setUser($this->getUser());
             $manage->persist($recette);
@@ -80,7 +108,7 @@ class RecetteController extends AbstractController
                 'Votre recette a été créé avec succès !'
             );
 
-            return $this->redirectToRoute('recette.index');
+            return $this->redirectToRoute('recette_index');
 
 
 
@@ -116,7 +144,7 @@ class RecetteController extends AbstractController
 
 
 
-            return $this->redirectToRoute('recette.index');
+            return $this->redirectToRoute('recette_index');
         }
 
         return $this->render('recette/edit.html.twig', [
@@ -139,7 +167,7 @@ class RecetteController extends AbstractController
             'Votre recette a été supprimé avec succès !'
         );
 
-        return $this->redirectToRoute('recette.index');
+        return $this->redirectToRoute('recette_index');
     }
 
     #[Route('/recette/{id}', 'recette.show', methods: ['GET', 'POST'])]

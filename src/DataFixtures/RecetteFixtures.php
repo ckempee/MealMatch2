@@ -16,7 +16,7 @@ class RecetteFixtures extends Fixture implements DependentFixtureInterface
         $rep = $manager->getRepository(User::class);
         $user = $rep->findAll();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $userChoisi = $user[rand(0, count($user) - 1)];
             $recette = new Recette();
             // créer un hydrate!!!

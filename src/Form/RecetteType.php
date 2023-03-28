@@ -6,16 +6,18 @@ use Assert\Length;
 use Assert\NotBlank;
 use App\Entity\Recette;
 use App\Entity\Categories;
+use App\Form\DetailsRecetteType;
 use App\Repository\CategoriesRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class RecetteType extends AbstractType
 {
@@ -116,7 +118,9 @@ class RecetteType extends AbstractType
                 'constraints' => [
                     new Assert\NotBlank()
                 ]
-  ])    
+])    
+
+
                 ->add('categories', EntityType::class, [
                     'class' => Categories::class,
                     
@@ -124,6 +128,11 @@ class RecetteType extends AbstractType
                     
                 ])
     
+                ->add('details', CollectionType::class, [
+                    'entry_type' => DetailsRecetteType::class,
+                    'entry_options' => ['label' => false],
+                    'allow_add' => true,
+                ])
           
             
             ->add('submit', SubmitType::class, [

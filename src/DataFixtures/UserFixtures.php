@@ -26,7 +26,7 @@ class UserFixtures extends Fixture
             $user = new User();
             $user->setNom($faker->lastName);
             $user->setPrenom($faker->firstName);
-            $user->setEmail ($faker->email);
+            $user->setEmail ('email' . $i . '@gmail.com');
             $user->setPassword($this->passwordHasher->hashPassword(
                  $user,
                  'lePassword'.$i
