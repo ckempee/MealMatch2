@@ -5,7 +5,11 @@
 {% block stylesheets %}
 {{parent()}}
 <style>
-
+.card-img-top{
+  max-height:400px;
+  object-fit:cover;
+  
+}
 </style>
 {% endblock %}
 {% block body %}
@@ -25,36 +29,26 @@
 			<a href="{{ path('recette_creation') }}" class="btn btn-primary">
 				Créer une recette</a>
 
-    <table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Numero</th>
-      <th scope="col">Titre</th>
-      <th scope="col">Nombre de Personnes</th>
-      <th scope="col">Date de Création</th>
-      <th scope="col">Edition</th>
-			<th scope="col">Suppresion</th>
-
-    </tr>
-  </thead>
-  <tbody>
-    {% for recette in recettes%}
-    <tr class="table-primary">
-      <th scope="row">{{recette.id}}</th>
-      <td>{{recette.titre}}</td>
-      <td>{{recette.nbPersonne}}</td>
-      <td>{{recette.createdAt|date('d/m/Y')}}</td>
-      <td>
-								<a href="{{ path('recette.edit', { id: recette.id }) }}" class="btn btn-info">Modifier</a>
-							</td>
-							<td>
-								<a href="{{ path('recette.delete', { id: recette.id }) }}" class="btn btn-warning">Supprimer</a>
-							</td>
-
-    </tr>
+ <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for recette in recettes %}
+    
+  <div class="col">
+    <div class="card">
+      <img src="{{ vich_uploader_asset(recette, 'imageFile') }}" class="card-img-top"
+        alt="recette de l'image"/>
+      <div class="card-body">
+        <h5 class="card-title">{{recette.titre}}</h5>
+        <div>
+			<span class="badge bg-primary">Créée le
+				{{ recette.createdAt|date('d/m/Y') }}</span>
+		</div>
+      </div>
+    </div>
+  </div>
     {%endfor%}
-  </tbody>
-</table>
+  </div>
+
+
 {# display navigation #}
 <div class="navigation d-flex justify-content-center mt-4">
     {{ knp_pagination_render(recettes) }}
