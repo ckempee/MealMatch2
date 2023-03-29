@@ -1,30 +1,52 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}SymRecipe - Recettes de la communauté
 {% endblock %}
+
+{% block stylesheets %}
+{{parent()}}
+<style>
+.card-img-top{
+  max-height:400px;
+  object-fit:cover;
+  
+}
+</style>
+{% endblock %}
+
 
 {% block body %}
 	<div class="container mt-4">
 		{% if not recettes.items is same as([]) %}
-			<h1>Recettes de la communuaté</h1>
+			<h1>Recettes de la communauté</h1>
 
-			<div class="d-flex justify-content-center flex-wrap">
-				{% for recipe in recettes %}
-					<div class="card border-primary mb-3" style="max-width: 20rem;">
-						<div class="card-header">Recette n°{{ recipe.id }}</div>
-						<div class="card-body">
-							<h4 class="card-title">
-								<a href="{{ path('recette.show', {id: recipe.id}) }}">{{ recipe.titre }}</a>
-							</h4>
-							<p class="card-text">{{ recipe.description|slice(0, 100) ~ '...' }}</p>
-						</div>
-					</div>
-				{% endfor %}
-			</div>
+			<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for recette in recettes %}
+    
+  <div class="col">
+    <div class="card">
+      <img src="{{ vich_uploader_asset(recette, 'imageFile') }}" class="card-img-top"
+        alt="recette de l'image"/>
+      <div class="card-body">
+        <h5 class="card-title">{{recette.titre}}</h5>
+        <div>
+			<span class="badge bg-primary">Créée le
+				{{ recette.createdAt|date('d/m/Y') }}</span>
+		</div>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+  </div>
+
+  <div class="navigation d-flex justify-content-center mt-4">
+    {{ knp_pagination_render(recettes) }}
+</div>
 
 
 		{% else %}
-			<h4>Il n'y a pas de rcettes</h4>
+			<h4>Il n'y a pas de recettes</h4>
 		{% endif %}
 	</div>
 {% endblock %}

@@ -39,20 +39,20 @@ class RecetteRepository extends ServiceEntityRepository
         }
     }
 
-    public function findPublicRecipe(?int $nbRecipes): array
+    public function findPublicRecipe(?int $nbRecipes = null): array
     {
         sleep(3);
         $queryBuilder = $this->createQueryBuilder('r')
             //de la plus recente à la plus ancienne
             ->orderBy('r.createdAt', 'DESC');
-
-
-        if ($nbRecipes !== 0 || $nbRecipes !== null) {
+    
+        if ($nbRecipes !== null) {
             $queryBuilder->setMaxResults($nbRecipes);
         }
-
+    
         return $queryBuilder->getQuery()
             ->getResult();
     }
+    
 
 }

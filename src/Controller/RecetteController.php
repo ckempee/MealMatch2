@@ -33,7 +33,7 @@ class RecetteController extends AbstractController
         $recettes = $paginator->paginate(
             $repository->findBy(['user' => $this->getUser()]),
             $request->query->getInt('page', 1),
-            5
+            6
         );
 
         //je les envois à la vue
@@ -49,7 +49,7 @@ class RecetteController extends AbstractController
         $recettes = $paginator->paginate(
             $repository->findPublicRecipe(null),
             $request->query->getInt('page', 1),
-            5
+            6
         );
 
         //je les envois à la vue
