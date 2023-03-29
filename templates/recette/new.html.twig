@@ -17,12 +17,19 @@
 <h1 class="mt-4">Nouvelle Recette</h1>
 {{ form_start(form) }}
 
+
+
 		<div class="form-group">
 			{{ form_label(form.titre) }}
 			{{ form_widget(form.titre) }}
 			<div class="form-error">
 				{{ form_errors(form.titre) }}
 			</div>
+		</div>
+			<div class="form-group">
+			{{ form_label(form.imageFile) }}
+			{{ form_widget(form.imageFile) }}
+			
 		</div>
 
 		<div class="form-group">
@@ -57,13 +64,7 @@
 			</div>
 		</div>
 
-		<div class="form-group">
-			{{ form_label(form.photo) }}
-			{{ form_widget(form.photo) }}
-			<div class="form-error">
-				{{ form_errors(form.photo) }}
-			</div>
-		</div>
+		
 
 		<div class="form-group">
 			{{ form_widget(form.submit) }}

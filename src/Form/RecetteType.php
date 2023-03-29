@@ -10,6 +10,7 @@ use App\Form\DetailsRecetteType;
 use App\Repository\CategoriesRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -40,6 +41,15 @@ class RecetteType extends AbstractType
                 ]
 
             ])
+            
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image de la recette',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'required' => false
+            ])
+
             ->add('dureePreparation',  TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -89,22 +99,7 @@ class RecetteType extends AbstractType
 
 
 
-            ->add('photo', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'minlength' => '2',
-                    'maxlength' => '255'
-                ],
-                'label' => 'Photo',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\Length(['min' => 2, 'max' => 255]),
-                    new Assert\NotBlank()
-                ]
-
-            ])
+            
             ->add('description', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control',

@@ -24,6 +24,10 @@
 				{{ recette.createdAt|date('d/m/Y') }}</span>
 		</div>
 
+		<div class="recipe__image">
+			<img style="max-width: 500px;" src="{{ vich_uploader_asset(recette, 'imageFile') }}">
+		</div>
+		
 		<div class="mt-4">
 			{% if recette.dureePreparation %}
 				<p>Temps (en minute) :
@@ -52,14 +56,6 @@
 			{% endif %}
 		</div>
 
-		<div class="mt-4">
-			{% if recette.photo %}
-				<p>Prix (en €) :
-					{{ recette.photo}}</p>
-			{% else %}
-				<p>Prix non renseigné</p>
-			{% endif %}
-		</div>
 
 		<div class="mt-4">
 			{{ recette.description|raw }}

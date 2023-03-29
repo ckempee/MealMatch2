@@ -24,7 +24,7 @@ class RecetteFixtures extends Fixture implements DependentFixtureInterface
             $recette->setDureePreparation("25min" );
             $recette->setTempsCuisson("15min" );
             $recette->setNbPersonne("2" );
-            $recette->setPhoto("2.png" );
+            
             $recette->setDescription("Description, description, description" );
             $recette->setUser($userChoisi);
 
