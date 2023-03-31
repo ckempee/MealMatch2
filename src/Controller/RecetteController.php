@@ -32,6 +32,7 @@ class RecetteController extends AbstractController
         //je récupère toutes les recettes
         $recettes = $paginator->paginate(
             $repository->findBy(['user' => $this->getUser()]),
+            
             $request->query->getInt('page', 1),
             6
         );
@@ -172,7 +173,7 @@ class RecetteController extends AbstractController
         return $this->redirectToRoute('recette_index');
     }
 
-    #[Route('/recette/{id}', 'recette.show', methods: ['GET', 'POST'])]
+    #[Route('/recette/{id}', 'recette_show', methods: ['GET', 'POST'])]
     public function show(Recette $recette): Response
     {
         return $this->render(

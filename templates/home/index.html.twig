@@ -7,16 +7,26 @@
 {% block stylesheets %}
     {{parent()}}
     <style>
-    .background-image{
-        background-color:red;
-        
+    body{
+        background-color: #f2f1f4;
     }
+    #HomePage{
+        
+        background-image: url('./images/homePage.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        height: 100vh;
+        height:650px;
+    }
+
+
 
     </style>
 {% endblock %}
 {% block body %}
 
-<div class="background-image">
+<div id="HomePage"> 
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -24,15 +34,36 @@
                     <h1 style="color:green; font-size: 4rem;">MealMatch</h1>
                     <h3>Bienvenue sur MealMatch, le site de partage de recettes où vous pouvez trouver et publier vos plats préférés en toute simplicité. Rejoignez notre communauté et découvrez de nouvelles idées culinaires pour épater vos papilles !</h3>
                     
-                    <a href="{{ path('recette_index_public') }}" class="btn btn-success" id="recipes-button">Toutes les recettes</a>
+                    <a href="{{ path('recette_index_public') }}" class="btn btn-success mt-4" id="recipes-button">Toutes les recettes</a>
 
                 </div>
             </div>
         </div>
-        
-
-    
     </div>
+
+</div>
+
+<div class="container mt-4 mb-4 text-center">
+<h2 class="center mb-4"> Les dernières recettes</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for recette in recettes %}
+    
+  <div class="col">
+    <div class="card text-right">
+      <img src="{{ vich_uploader_asset(recette, 'imageFile') }}" class="card-img-top"
+        alt="recette de l'image"/>
+      <div class="card-body">
+      <a href="{{ path('recette_show', { id: recette.id }) }}}">
+        <h5 class="card-title ">{{recette.titre}}</h5>
+    </a>
+        
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+  </div>
+
+  <a class="recettepublic" href="path('recette_index_public')">Voir toutes les recettes</a>
 </div>
 {% endblock %}
 

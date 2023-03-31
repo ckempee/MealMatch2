@@ -10,8 +10,12 @@
   
   /* Style pour l'image de fond */
   .background-image {
-    background-color: red;
-    background-image: url('images/cuisine.jpg');
+    
+    background-image: url('./images/cuisine.jpg');
     background-size: cover;
     height: 100vh; /* Hauteur de l'image de fond égale à la hauteur de l'écran */
+  }
+
+  .HomePage{
+    background-color: aqua;
   }
