@@ -4,7 +4,16 @@
 {% block title %}
     MealMatch - Accueil
 {% endblock %}
+{% block stylesheets %}
+    {{parent()}}
+    <style>
+    .background-image{
+        background-color:red;
+        
+    }
 
+    </style>
+{% endblock %}
 {% block body %}
 
 <div class="background-image">
@@ -13,7 +22,7 @@
             <div class="col-md-8">
                 <div class="container-div text-center">
                     <h1 style="color:green; font-size: 4rem;">MealMatch</h1>
-                    <h3>Bienvenue sur MealMatch, le site pour partager et découvrir des recettes</h3>
+                    <h3>Bienvenue sur MealMatch, le site de partage de recettes où vous pouvez trouver et publier vos plats préférés en toute simplicité. Rejoignez notre communauté et découvrez de nouvelles idées culinaires pour épater vos papilles !</h3>
                     
                     <a href="{{ path('recette_index_public') }}" class="btn btn-success" id="recipes-button">Toutes les recettes</a>
 
