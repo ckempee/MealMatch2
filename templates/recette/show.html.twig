@@ -1,67 +1,76 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-	SymRecipe -
-	{{ recette.titre }}
+    SymRecipe - {{ recette.titre }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+	body{
+		background-color: ivory;
+	}
+        .container {
+            background-color: white;
+            width: 60%;
+			border-radius: 15px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			overflow:hidden;
+			padding-left:0;
+        }
+        .recipe__image {
+            float: left;
+            margin-right: 20px;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
-	<div class="container">
+    <div class="container d-flex justify-content-right mt-4 ">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
 
-		{% for message in app.flashes('success') %}
-			<div class="alert alert-success mt-4">
-				{{ message }}
-			</div>
-		{% endfor %}
+        <div class="recipe__image ml-0">
+            <img style="max-width: 500px;" src="{{ vich_uploader_asset(recette, 'imageFile') }}">
+        </div>
 
-		<h1 class="mt-4">{{ recette.titre }}</h1>
+        <div class="recipe__details">
+            <h1 class="mt-4 display-1">{{ recette.titre }}</h1>
 
-		
+            <div>
+                <span class="badge bg-primary">Créée le {{ recette.createdAt|date('d/m/Y') }}</span>
+            </div>
 
+            <div class="mt-4">
+                {% if recette.dureePreparation %}
+                    <p>Temps (en minute) : {{ recette.dureePreparation }}</p>
+                {% else %}
+                    <p>Temps non renseigné</p>
+                {% endif %}
+            </div>
 
-		<div>
-			<span class="badge bg-primary">Créée le
-				{{ recette.createdAt|date('d/m/Y') }}</span>
-		</div>
+            <div class="mt-4">
+                {% if recette.tempsCuisson %}
+                    <p>Difficulté : {{ recette.tempsCuisson }}/5</p>
+                {% else %}
+                    <p>Difficulté non renseigné</p>
+                {% endif %}
+            </div>
 
-		<div class="recipe__image">
-			<img style="max-width: 500px;" src="{{ vich_uploader_asset(recette, 'imageFile') }}">
-		</div>
-		
-		<div class="mt-4">
-			{% if recette.dureePreparation %}
-				<p>Temps (en minute) :
-					{{ recette.dureePreparation }}</p>
-			{% else %}
-				<p>Temps non renseigné</p>
-			{% endif %}
-		</div>
+            <div class="mt-4">
+                {% if recette.nbPersonne %}
+                    <p>Pour {{ recette.nbPersonne }} personnes</p>
+                {% else %}
+                    <p>Nombre de personnes non renseigné</p>
+                {% endif %}
+            </div>
 
-		<div class="mt-4">
-			{% if recette.tempsCuisson  %}
-				<p>Difficulté :
-					{{ recette.tempsCuisson }}/5</p>
-			{% else %}
-				<p>Difficulté non renseigné</p>
-			{% endif %}
-		</div>
-
-		<div class="mt-4">
-			{% if recette.nbPersonne %}
-				<p>Pour
-					{{ recette.nbPersonne }}
-					personnes</p>
-			{% else %}
-				<p>Nombre de personnes non renseigné</p>
-			{% endif %}
-		</div>
-
-
-		<div class="mt-4">
-			{{ recette.description|raw }}
-		</div>
-
-		
-
-	
-	{% endblock %}
+            <div class="mt-4">
+                {{ recette.description|raw }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

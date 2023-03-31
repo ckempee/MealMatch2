@@ -330,6 +330,7 @@ class Recette
 
     public function getCategories(): ?Categories
     {
+        
         return $this->categories;
     }
 
