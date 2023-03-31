@@ -123,7 +123,7 @@ class RecetteController extends AbstractController
     }
 
     #[Security("is_granted('ROLE_USER') and user === recette.getUser()")]
-    #[Route('/recette/edition/{id}', 'recette.edit', methods: ['GET', 'POST'])]
+    #[Route('/recette/edition/{id}', 'recette_edit', methods: ['GET', 'POST'])]
     public function edit(
         Recette $recette,
         Request $request,
@@ -155,7 +155,7 @@ class RecetteController extends AbstractController
     }
 
 
-    #[Route('/recette/suppression/{id}', 'recette.delete', methods: ['GET'])]
+    #[Route('/recette/suppression/{id}', 'recette_delete', methods: ['GET'])]
     #[Security("is_granted('ROLE_USER') and user === recette.getUser()")]
     public function delete(
         EntityManagerInterface $manager,

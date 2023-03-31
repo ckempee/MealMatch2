@@ -15,6 +15,64 @@ body {
   
   object-fit:cover;
 }
+
+/* Ajout du style pour le conteneur des boutons */
+.card-buttons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.6);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.card {
+  position: relative;
+}
+
+.card:hover .image-overlay {
+  display: flex;
+}
+
+.image-overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-overlay .btn {
+  border: 2px solid black;
+  margin: 5px;
+}
+
+/* Affichage des boutons au survol de l'image */
+.card:hover .card-buttons {
+  opacity: 1;
+}
+
+.card-button {
+  color: white;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.card-button-left {
+  float: left;
+}
+
+.card-button-right {
+  float: right;
+}
+
 .titre{
   background-image: url('./images/mesrecettes.jpg');
   background-size: cover;
@@ -24,7 +82,13 @@ body {
   color: black;
   
   }
+.card:hover .card-img-top {
+  filter: brightness(60%) blur(1px);
+}
 
+.card:hover .image-overlay {
+  display: flex;
+}
 h1{
  padding-top:5%;
 }
@@ -57,9 +121,13 @@ h1{
     {% for recette in recettes %}
     
   <div class="col">
-    <div class="card">
-      <img src="{{ vich_uploader_asset(recette, 'imageFile') }}" class="card-img-top"
-        alt="recette de l'image"/>
+   <div class="card">
+  <img src="{{ vich_uploader_asset(recette, 'imageFile') }}" class="card-img-top" alt="recette de l'image" />
+  <div class="image-overlay">
+  <a href="{{ path('recette_edit', { id: recette.id }) }}}"><button type="button" class="btn btn-outline-success btn-lg">Modifier</button></a>
+    <a href="{{ path('recette_delete', { id: recette.id }) }}"><button type="button" class="btn btn-outline-success btn-lg">Supprimer</button></a>
+  </div>
+
       <div class="card-body">
         <h5 class="card-title">{{recette.titre}}</h5>
         <div>
