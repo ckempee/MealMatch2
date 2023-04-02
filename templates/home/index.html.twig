@@ -63,7 +63,7 @@
     {% endfor %}
   </div>
 
-  <a class="recettepublic" href="path('recette_index_public')">Voir toutes les recettes</a>
+  <a href="{{ path('recette_index_public') }}"> Voir toutes les recettes</a>
 </div>
 
 
@@ -76,22 +76,22 @@
     <div class="carousel-item active">
       <div class="card-wrapper container-sm d-flex  justify-content-around">
       <div class="card  " style="width: 22rem;">
-  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <img src="./images/entree.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <a href="#">Entrée</a>
+    <a href="{{ path('categorie_show', { id: 1 }) }}">Entrée</a>
     
   </div>
 </div><div class="card" style="width: 22rem;">
-  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <img src="./images/plat.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <a href="#">Entrée</a>
+    <a href="{{ path('categorie_show', { id: 2 }) }}">Plat</a>
     
   </div>
         </div>
         <div class="card" style="width: 22rem;">
-  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <img src="./images/dessert.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <a href="#">Plat</a>
+    <a href="{{ path('categorie_show', { id: 3 }) }}">Dessert</a>
     
   </div>
 </div>
@@ -100,21 +100,21 @@
     <div class="carousel-item">
       <div class="card-wrapper container-sm d-flex   justify-content-around">
       <div class="card  " style="width: 22rem;">
-  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <img src="./images/Accompagment.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <a href="#">Entrée</a>
+    <a href="#">Accompagnement</a>
     
   </div>
 </div><div class="card" style="width: 22rem;">
-  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
-  <div class="card-body">
-    <a href="#">Entrée</a>
-  </div>
+  <img src="./images/dejeuner.jpg" class="card-img-top" alt="...">
+  <a href="{{ path('categorie_show', { id: 6 }) }}"
+    <h5 class="card-title">Dejeuner</h5>
+    </a>
         </div>
         <div class="card" style="width: 22rem;">
-  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <img src="./images/boisson.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <a href="#">Entrée</a>
+    <a href="{{ path('categorie_show', { id: 7 }) }}">Boisson</a>
     
   </div>
 </div>
@@ -123,23 +123,28 @@
     <div class="carousel-item">
       <div class="card-wrapper container-sm d-flex  justify-content-around">
       <div class="card " style="width: 22rem;">
-  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <img src="./images/soupe.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">hoe</h5>
-    
+  <a href="{{ path('categorie_show', { id: 8 }) }}">
+    <h5 class="card-title">Soupe et Potage</h5>
+  </a>
   </div>
 </div>
         <div class="card" style="width: 22rem;"">
-  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <img src="./images/encas.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">Coucoue</h5>
+    <a href="{{ path('categorie_show', { id: 10 }) }}">
+    <h5 class="card-title">En-cas</h5>
+  </a>
     
   </div>
         </div>
         <div class="card" style="width: 22rem;"">
-  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <img src="./images/viande.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">vamos</h5>
+    <a href="{{ path('categorie_show', { id: 11 }) }}">
+    <h5 class="card-title">Viande</h5>
+  </a>
     
   </div>
 </div>
@@ -149,23 +154,29 @@
   <div class="carousel-item">
       <div class="card-wrapper container-sm d-flex  justify-content-around">
       <div class="card " style="width: 22rem;">
-  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <img src="./images/poisso.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">Houlalaa</h5>
+    <a href="{{ path('categorie_show', { id: 12}) }}">
+    <h5 class="card-title">Poisson et Fruit de mer</h5>
+  </a>
     
   </div>
 </div>
         <div class="card" style="width: 22rem;"">
-  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <img src="./images/fromage.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">OL</h5>
+    <a href="{{ path('categorie_show', { id: 13 }) }}">
+    <h5 class="card-title">Produits Laitiers</h5>
+  </a>
     
   </div>
         </div>
         <div class="card" style="width: 22rem;"">
-  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <img src="./images/apero.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">coucou</h5>
+  <a href="{{ path('categorie_show', { id: 5 }) }}"
+    <h5 class="card-title">Apero</h5>
+    </a>
     
   </div>
 </div>
