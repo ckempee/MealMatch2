@@ -22,6 +22,7 @@
 
 
 
+
     </style>
 {% endblock %}
 {% block body %}
@@ -43,7 +44,7 @@
 
 </div>
 
-<div class="container mt-4 mb-4 text-center">
+<div class="container mt-4 mb-4 text-center" style="padding-bottom:15px;border-bottom:1px solid grey;">
 <h2 class="center mb-4"> Les dernières recettes</h2>
 <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for recette in recettes %}
@@ -63,8 +64,9 @@
     {% endfor %}
   </div>
 
-  <a href="{{ path('recette_index_public') }}"> Voir toutes les recettes</a>
+  <a href="{{ path('recette_index_public') }}" class="mb-4"> Voir toutes les recettes</a>
 </div>
+
 
 
 

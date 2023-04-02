@@ -74,12 +74,11 @@ body {
 }
 
 .titre{
-  background-image: url('./images/mesrecettes.jpg');
-  background-size: cover;
+
   max-width: 100%;
-  height: 150px;
-  margin-bottom:25px;text-align:center;
-  color: black;
+  height: 180px;
+  margin-bottom:25px;
+  text-align:center;
   
   }
 .card:hover .card-img-top {
@@ -100,10 +99,62 @@ h1{
 
 {% block body %}
 
-<div class="container">
+<div class="container mb-4">
 <div class="example-wrapper">
-<div class="titre">
-    <h1>Categorie: {{categorie.nom}}</h1>
+<div class="titre" style="border-bottom:1px solid black">
+    <h1 class="mb-3"> {{categorie.nom}}</h1>
+    {%if categorie.id==6 %}
+    <h6 class="mb-2"><em> Les déjeuners sont l'un des repas les plus importants de la journée, car ils nous donnent l'énergie nécessaire pour commencer 
+    la journée du bon pied. Dans cette catégorie, vous trouverez des recettes pour des plats chauds, des sandwichs, 
+    des salades et des œufs, parfaits pour un repas rapide et facile à préparer. </em></h6>
+    {% elseif categorie.id==1 %}
+    
+    <h6 class="mb-2"><em> Les entrées sont un élément clé de tout repas.
+    Elles sont souvent légères et fraîches, et elles ouvrent l'appétit pour les plats principaux à venir. Dans cette catégorie, vous trouverez une sélection de recettes d'entrées pour tous les goûts et occasions.</em></h6>
+    {% elseif categorie.id==2 %}
+    
+    <h6 class="mb-2"><em>Les plats principaux sont le cœur de tout repas. Dans cette catégorie, vous trouverez une variété de recettes pour tous les goûts et les occasions. Que vous soyez végétarien, carnivore, adepte de la cuisine rapide ou gourmet, nous avons des options qui vous plairont.</em></h6>
+   
+   {% elseif categorie.id==3 %}
+    
+    <h6 class="mb-2"><em>Les desserts sont la touche finale parfaite pour tout repas. Dans cette catégorie, 
+    vous trouverez une sélection de recettes de desserts pour tous les goûts et les occasions, 
+    de gâteaux d'anniversaire spectaculaires à des desserts légers et sains.</em></h6>
+
+    {% elseif categorie.id==4 %}
+    
+    <h6 class="mb-2"><em>Les accompagnements sont la clé pour compléter un repas savoureux. Dans cette catégorie, vous trouverez une sélection de recettes d'accompagnements pour tous les goûts et les occasions.</em></h6>
+
+     {% elseif categorie.id==5 %}
+    
+    <h6 class="mb-2"><em>Les apéros sont une partie essentielle de tout rassemblement social. Dans cette catégorie, vous trouverez une sélection de recettes d'apéros pour tous les goûts et les occasions.Que vous cherchiez des apéros rapides et faciles ou que vous prévoyiez une soirée sophistiquée, notre sélection de recettes d'apéros est là pour vous inspirer.</em></h6>
+
+     {% elseif categorie.id==7 %}
+    
+    <h6 class="mb-2"><em>Les boissons sont un élément important de tout repas ou rassemblement social. Dans cette catégorie, vous trouverez une sélection de recettes de boissons pour tous les goûts et les occasions. Et n'oubliez pas de boire avec modéartions, sauf si c'est de l'eau!</em></h6>
+
+    
+
+     {% elseif categorie.id==8 %}
+    
+    <h6 class="mb-2"><em>  Les soupes et potages sont une excellente façon de se réchauffer pendant les mois les plus froids ou de se rafraîchir pendant les jours chauds. Dans cette catégorie, vous trouverez une sélection de recettes de soupes et potages pour tous les goûts et les occasions. </em></h6>
+
+
+
+     {% elseif categorie.id==10 %}
+    
+    <h6 class="mb-2"><em> Les en-cas ou snacks sont des collations rapides et faciles à préparer qui peuvent être consommées à tout moment de la journée. Dans cette catégorie, vous trouverez une sélection de recettes d'en-cas et de snacks pour tous les goûts et les occasions.</em></h6>
+
+     {% elseif categorie.id==11 %}
+    
+    <h6 class="mb-2"><em> La viande est un ingrédient populaire dans de nombreuses cuisines à travers le monde et peut être préparée de nombreuses façons différentes. Dans cette catégorie, vous trouverez une sélection de recettes de viande pour tous les goûts et les occasions.</em></h6>
+
+     {% elseif categorie.id==12 %}
+    
+    <h6 class="mb-2"><em> Le poisson et les fruits de mer sont des ingrédients délicieux et sains qui peuvent être préparés de nombreuses façons différentes. Dans cette catégorie, vous trouverez une sélection de recettes de poisson et de fruits de mer pour tous les goûts et les occasions.</em></h6>
+    
+    {% endif %}
+    
 </div>
 
 		

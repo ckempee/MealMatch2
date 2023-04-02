@@ -5,12 +5,22 @@
 {% endblock %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <style>
-	body{
-		background-color: #f1f2f4;
-	}
-        .container {
+
+{{parent()}}
+<style>
+body{
+     background-color: white;
+    
+        
+}
+.bg-image{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height:900px;
+
+}
+.container {
             background-color: white;
             width: 70%;
 			border-radius: 15px;
@@ -18,59 +28,71 @@
 			overflow:hidden;
 			padding-left:0;
         }
-        .recipe__image {
-            float: left;
-            margin-right: 20px;
-        }
+       
+       .quantity {
+    font-size: 1em;
+  }
+</style>
     </style>
 {% endblock %}
 
 {% block body %}
-    <div class="container d-flex justify-content-right mt-4 ">
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success mt-4">
-                {{ message }}
-            </div>
-        {% endfor %}
 
-        <div class="recipe__image ml-0">
-            <img style="max-width: 500px;" src="{{ vich_uploader_asset(recette, 'imageFile') }}">
-        </div>
+<div class="bg-image pt-4" style="background-image: url('https://img.freepik.com/free-photo/close-up-black-marble-textured-background_53876-148094.jpg?w=1060&t=st=1680451606~exp=1680452206~hmac=a02567c38143b7eee8d53d2d2655424f4cb2f1824e5dcf6b985598d181a7bcbd')">
 
-        <div class="recipe__details">
-            <h1 class="mt-4 display-1">{{ recette.titre }}</h1>
 
-            <div>
-                <span class="badge bg-primary">Créée le {{ recette.createdAt|date('d/m/Y') }}</span>
-            </div>
-
-            <div class="mt-4">
-                {% if recette.dureePreparation %}
-                    <p>Temps (en minute) : {{ recette.dureePreparation }}</p>
-                {% else %}
-                    <p>Temps non renseigné</p>
-                {% endif %}
-            </div>
-
-            <div class="mt-4">
-                {% if recette.tempsCuisson %}
-                    <p>Difficulté : {{ recette.tempsCuisson }}/5</p>
-                {% else %}
-                    <p>Difficulté non renseigné</p>
-                {% endif %}
-            </div>
-
-            <div class="mt-4">
-                {% if recette.nbPersonne %}
-                    <p>Pour {{ recette.nbPersonne }} personnes</p>
-                {% else %}
-                    <p>Nombre de personnes non renseigné</p>
-                {% endif %}
-            </div>
-
-            <div class="mt-4">
-                {{ recette.description|raw }}
-            </div>
-        </div>
+<div class="container mt-3 p-1 container1"style="border:1px solid black;">
+  <div class="col-md-12 text-center px-4">
+    <div class="d-flex justify-content-between">
+      <h4 class="mx-4 my-2"><i class="bi bi-clock"></i>Préparation</h4>
+      <h4 class="mx-4 my-2"><i class="bi bi-hourglass"></i>Cuisson</h4>
+      <h4 class="mx-4 my-2"><i class="bi bi-person"></i>Quantité</h4>
     </div>
+  </div>
+  <div class="col-md-12 text-center px-4" >
+    <div class="d-flex justify-content-between align-items-center px-0">
+      <h4 class="mx-4 my-0 quantity mx-2" style="padding-left:10px;">{{ recette.dureePreparation }} min.</h4>
+      <h4 class="mx-0 my-0 quantity">{{ recette.tempsCuisson }} min.</h4>
+      <h4 class="mx-4 my-0 quantity mx-2 style="padding-right:30px;">{{ recette.nbPersonne }} pers.</h4>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container mt-4 mb-4">
+<div class="row">
+   
+<div>
+<div class="col-md-12 text-center mt-4">
+<h1>{{ recette.titre }}</h1>
+<hr>
+<div class="d-flex justify-content-center">
+  <span class="badge bg-success" style="margin-right: 10px;">{{recette.categories}}</span>
+  <h6 style="margin-left: 10px;">Créee le:{{ recette.createdAt| date('d/m/Y')}}</h6>
+  <h6 style="margin-left: 10px;">Par: {{recette.user.nom}} {{recette.user.prenom}}</h6>
+  <div>
+
+</div>
+</div>
+<div class="row mt-4">
+<div class="col-md-12 text-center">
+<div class="recipe__image mx-auto">
+<img style="min-width: 700px;" src="{{ vich_uploader_asset(recette, 'imageFile') }}">
+</div>
+</div>
+</div>
+<div class="row mt-4">
+<div class="col-md-8 offset-md-2">
+<div class="recipe__details">
+
+<div class="mt-4">
+{{ recette.description|raw }}
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
 {% endblock %}
