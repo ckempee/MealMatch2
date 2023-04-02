@@ -100,32 +100,22 @@ h1{
 
 {% block body %}
 
-<div class="container mt-4">
-		{% for message in app.flashes('success') %}
-			<div class="alert alert-success mt-4">
-				{{ message }}
-			</div>
-		{% endfor %}
-
-
 <div class="container">
 <div class="example-wrapper">
 <div class="titre">
-    <h1>Mes Recettes</h1>
+    <h1>Categorie: {{categorie.nom}}</h1>
 </div>
 
-			<a href="{{ path('recette_creation') }}" class="btn btn-primary mb-4">
-				Créer une recette</a>
+		
 
  <div class="row row-cols-1 row-cols-md-3 g-4">
-    {% for recette in recettes %}
+    {% for recette in categorie.recettes %}
     
   <div class="col">
    <div class="card">
   <img src="{{ vich_uploader_asset(recette, 'imageFile') }}" class="card-img-top" alt="recette de l'image" />
   <div class="image-overlay">
-  <a href="{{ path('recette_edit', { id: recette.id }) }}"><button type="button" class="btn btn-outline-success btn-lg">Modifier</button></a>
-    <a href="{{ path('recette_delete', { id: recette.id }) }}"><button type="button" class="btn btn-outline-success btn-lg">Supprimer</button></a>
+   <a href="{{ path('recette_show', { id: recette.id }) }}"><button type="button" class="btn btn-outline-success btn-lg">Voir Recette</button></a>
   </div>
 
       <div class="card-body">
@@ -141,14 +131,7 @@ h1{
   </div>
 
 
-{# display navigation #}
-<div class="navigation d-flex justify-content-center mt-4">
-    {{ knp_pagination_render(recettes) }}
-</div>
 
-
-   
- 
     
    
 

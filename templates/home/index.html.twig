@@ -53,7 +53,7 @@
       <img src="{{ vich_uploader_asset(recette, 'imageFile') }}" class="card-img-top"
         alt="recette de l'image"/>
       <div class="card-body">
-      <a href="{{ path('recette_show', { id: recette.id }) }}}">
+      <a href="{{ path('recette_show', { id: recette.id }) }}">
         <h5 class="card-title ">{{recette.titre}}</h5>
     </a>
         
@@ -64,6 +64,127 @@
   </div>
 
   <a class="recettepublic" href="path('recette_index_public')">Voir toutes les recettes</a>
+</div>
+
+
+
+
+<div class="container mt-4 mb-4 text-center">
+  <h2 class="center mb-4"> Par Catégorie</h2>
+<div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="card-wrapper container-sm d-flex  justify-content-around">
+      <div class="card  " style="width: 22rem;">
+  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <div class="card-body">
+    <a href="#">Entrée</a>
+    
+  </div>
+</div><div class="card" style="width: 22rem;">
+  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <div class="card-body">
+    <a href="#">Entrée</a>
+    
+  </div>
+        </div>
+        <div class="card" style="width: 22rem;">
+  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <div class="card-body">
+    <a href="#">Plat</a>
+    
+  </div>
+</div>
+</div>
+    </div>
+    <div class="carousel-item">
+      <div class="card-wrapper container-sm d-flex   justify-content-around">
+      <div class="card  " style="width: 22rem;">
+  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <div class="card-body">
+    <a href="#">Entrée</a>
+    
+  </div>
+</div><div class="card" style="width: 22rem;">
+  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <div class="card-body">
+    <a href="#">Entrée</a>
+  </div>
+        </div>
+        <div class="card" style="width: 22rem;">
+  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <div class="card-body">
+    <a href="#">Entrée</a>
+    
+  </div>
+</div>
+    </div>
+    </div>
+    <div class="carousel-item">
+      <div class="card-wrapper container-sm d-flex  justify-content-around">
+      <div class="card " style="width: 22rem;">
+  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">hoe</h5>
+    
+  </div>
+</div>
+        <div class="card" style="width: 22rem;"">
+  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Coucoue</h5>
+    
+  </div>
+        </div>
+        <div class="card" style="width: 22rem;"">
+  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">vamos</h5>
+    
+  </div>
+</div>
+    </div>
+    
+  </div>
+  <div class="carousel-item">
+      <div class="card-wrapper container-sm d-flex  justify-content-around">
+      <div class="card " style="width: 22rem;">
+  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Houlalaa</h5>
+    
+  </div>
+</div>
+        <div class="card" style="width: 22rem;"">
+  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">OL</h5>
+    
+  </div>
+        </div>
+        <div class="card" style="width: 22rem;"">
+  <img src="https://source.unsplash.com/collection/190727/1600x900" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">coucou</h5>
+    
+  </div>
+</div>
+    </div>
+    
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+    
+    
+    
+
 </div>
 {% endblock %}
 

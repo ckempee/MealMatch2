@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Categories;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Categories>
@@ -38,6 +41,8 @@ class CategoriesRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+   
 
 //    /**
 //     * @return Categories[] Returns an array of Categories objects

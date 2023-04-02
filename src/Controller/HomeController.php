@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoriesRepository;
 use App\Repository\RecetteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
