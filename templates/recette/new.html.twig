@@ -7,14 +7,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 {% endblock %}
+
 {% block stylesheet %}
+{{parent()}}
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
+
 {% endblock %}
 
 
 
 {% block body %}
-<div class="container">
+
+<div class="container w-75 mb-4 p-4" >
 <h1 class="mt-4">Nouvelle Recette</h1>
 {{ form_start(form, {'attr': {'autocomplete':'off', 'id':'form_recette' , 'data-recette-id': null }} ) }}
 
@@ -95,7 +101,7 @@
 		
 		{# ul qui contient tous le forms de détail #}
 		<div class="form-group">
-		<ul id="details" class="details"
+		<ul id="details" class="details jusify-space-between"
 			data-index="{{ form.details|length > 0 ? form.details|last.vars.name + 1 : 0 }}"  
 			data-prototype="{{ form_widget(form.details.vars.prototype)|e('html_attr') }}">
 		{# généré en js! #}
@@ -133,6 +139,7 @@
 const addFormToCollectionCustom = (idCollectionHolder, idIngredient, nomIngredient) => {
 	let collectionHolder = document.querySelector ("." + idCollectionHolder);
 	const item = document.createElement('li');
+	item.classList.add('detail-item');
 	
 	item.innerHTML = collectionHolder
 	.dataset
@@ -306,9 +313,22 @@ addEventListener("DOMContentLoaded", (event) => {
 </script>
 
 <style>
+body{
+	
+	background-image:url('https://img.freepik.com/free-photo/close-up-black-marble-textured-background_53876-63511.jpg?w=1060&t=st=1680541858~exp=1680542458~hmac=72af5b28bf2b8486855a4856d4d482c8dc438a9c3329dcfffdf7bf739bc19ab2');
+
+	}
+
+.container{
+background-color:white;
+padding:20px;
+border-radius: 15px;
+box-shadow: 5px 5px 10px #888888;
+}
 .search-container {
   position: relative;
   margin-top: 20px;
+  margin-bottom:20px;
 }
 .search-container input[type="text"] {
   width: 100%;
@@ -340,6 +360,18 @@ addEventListener("DOMContentLoaded", (event) => {
 }
 .search-results li:hover {
   background-color: #f2f2f2;
+}
+
+.detail-item{
+	width:70%;
+	display:flex;
+	justify-content:space-between;
+}
+
+.detail-item div{
+	
+	display:flex;
+	justify-content:space-between;
 }
 </style>
 
