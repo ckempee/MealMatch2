@@ -72,6 +72,11 @@ class DetailsRecette
     {
         return $this->ingredients;
     }
+    
+    public function getIngredientsNom(): ?string
+    {
+        return $this->ingredients ? $this->ingredients->getNom() : null;
+    }
 
     public function setIngredients(?Ingredients $ingredients): self
     {

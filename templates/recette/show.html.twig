@@ -89,6 +89,13 @@ body{
 <div class="mt-4">
 {{ recette.description|raw }}
 </div>
+
+<ul>
+{% for detail in details %}
+    <li> {{detail.ingredients}} {{detail.quantite}} {{ detail.mesure}} </li>
+{% endfor %}
+</ul>
+
 </div>
 </div>
 </div>

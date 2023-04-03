@@ -72,4 +72,9 @@ class Ingredients
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->nom;
+    }
 }
