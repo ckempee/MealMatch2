@@ -38,10 +38,10 @@ body{
 
 {% block body %}
 
-<div class="bg-image pt-4" style="background-image: url('https://img.freepik.com/free-photo/close-up-black-marble-textured-background_53876-148094.jpg?w=1060&t=st=1680451606~exp=1680452206~hmac=a02567c38143b7eee8d53d2d2655424f4cb2f1824e5dcf6b985598d181a7bcbd')">
+<div class="bg-image pt-4 " style="background-image: url('https://img.freepik.com/free-photo/close-up-black-marble-textured-background_53876-148094.jpg?w=1060&t=st=1680451606~exp=1680452206~hmac=a02567c38143b7eee8d53d2d2655424f4cb2f1824e5dcf6b985598d181a7bcbd')">
 
 
-<div class="container mt-3 p-1 container1"style="border:1px solid black;">
+<div class="container mt-3 p-1 container1">
   <div class="col-md-12 text-center px-4">
     <div class="d-flex justify-content-between">
       <h4 class="mx-4 my-2"><i class="bi bi-clock"></i>Préparation</h4>
@@ -61,44 +61,39 @@ body{
 
 
 <div class="container mt-4 mb-4">
-<div class="row">
-   
-<div>
-<div class="col-md-12 text-center mt-4">
-<h1>{{ recette.titre }}</h1>
-<hr>
-<div class="d-flex justify-content-center">
-  <span class="badge bg-success" style="margin-right: 10px;">{{recette.categories}}</span>
-  <h6 style="margin-left: 10px;">Créee le:{{ recette.createdAt| date('d/m/Y')}}</h6>
-  <h6 style="margin-left: 10px;">Par: {{recette.user.nom}} {{recette.user.prenom}}</h6>
-  <div>
-
-</div>
-</div>
-<div class="row mt-4">
-<div class="col-md-12 text-center">
-<div class="recipe__image mx-auto">
-<img style="min-width: 700px;" src="{{ vich_uploader_asset(recette, 'imageFile') }}">
-</div>
-</div>
-</div>
-<div class="row mt-4">
-<div class="col-md-8 offset-md-2">
-<div class="recipe__details">
-
-<div class="mt-4">
-{{ recette.description|raw }}
-</div>
-
-<ul>
-{% for detail in details %}
-    <li> {{detail.ingredients}} {{detail.quantite}} {{ detail.mesure}} </li>
-{% endfor %}
-</ul>
-
-</div>
-</div>
-</div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1>{{ recette.titre }}</h1>
+      <hr>
+      <div class="d-flex justify-content-center">
+        <span class="badge bg-success" style="margin-right: 10px;">{{recette.categories}}</span>
+        <h6 style="margin-left: 10px;">Créee le:{{ recette.createdAt| date('d/m/Y')}}</h6>
+        <h6 style="margin-left: 10px;">Par: {{recette.user.nom}} {{recette.user.prenom}}</h6>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md-12 text-center">
+          <div class="recipe__image mx-auto">
+            <img style="min-width: 700px;" src="{{ vich_uploader_asset(recette, 'imageFile') }}">
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 offset-md-2">
+          <div class="recipe__details text-left">
+            <h4>Ingredients:</h4>
+            <ul>
+              {% for detail in details %}
+                <li>{{detail.ingredients}} {{detail.quantite}} {{ detail.mesure}}</li>
+              {% endfor %}
+            </ul>
+            <div class="mt-4">
+              {{ recette.description|raw }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 </div>
