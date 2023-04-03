@@ -3,7 +3,7 @@
 {% block title %}MealMatch- Nouvelle Recette{% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container mb-4 w-75">
 <h1 class="mt-4">Modifier ma recette</h1>
 {{ form_start(form, {'attr': {'autocomplete':'off', 'id':'form_recette' , 'data-recette-id': recetteId }} ) }}
 
@@ -120,6 +120,7 @@
 const addFormToCollectionCustom = (idCollectionHolder, idIngredient, nomIngredient) => {
 	let collectionHolder = document.querySelector ("." + idCollectionHolder);
 	const item = document.createElement('li');
+	item.classList.add('detail-item');
 	
 	item.innerHTML = collectionHolder
 	.dataset
@@ -298,9 +299,25 @@ addEventListener("DOMContentLoaded", (event) => {
 </script>
 
 <style>
+
+body{
+	
+	background-image:url('https://img.freepik.com/free-photo/close-up-black-marble-textured-background_53876-63511.jpg?w=1060&t=st=1680541858~exp=1680542458~hmac=72af5b28bf2b8486855a4856d4d482c8dc438a9c3329dcfffdf7bf739bc19ab2');
+
+}
+
+.container{
+background-color:white;
+padding:20px;
+border-radius: 15px;
+box-shadow: 5px 5px 10px #888888;
+
+}
+
 .search-container {
   position: relative;
   margin-top: 20px;
+  margin-bottom:20px;
 }
 .search-container input[type="text"] {
   width: 100%;
@@ -332,6 +349,31 @@ addEventListener("DOMContentLoaded", (event) => {
 }
 .search-results li:hover {
   background-color: #f2f2f2;
+}
+
+.detail-item{
+	width:70%;
+	display:flex;
+	justify-content:space-between;
+	margin-bottom:10px;
+}
+
+.detail-item div{
+	
+	display:flex;
+	justify-content:space-between;
+}
+
+.details li {
+	display:flex;
+	justify-content:space-between;
+	width:70%;
+	margin-bottom:10px;
+}
+
+.details li div {
+	display:flex;
+	justify-content:space-between;
 }
 </style>
 

@@ -101,7 +101,7 @@
 		
 		{# ul qui contient tous le forms de détail #}
 		<div class="form-group">
-		<ul id="details" class="details jusify-space-between"
+		<ul id="details" class="details"
 			data-index="{{ form.details|length > 0 ? form.details|last.vars.name + 1 : 0 }}"  
 			data-prototype="{{ form_widget(form.details.vars.prototype)|e('html_attr') }}">
 		{# généré en js! #}
