@@ -109,8 +109,42 @@ h1{
     <h6 class="mb-3"> <em>Laissez-vous inspirer par toutes les recettes partagées ii, toutes plus bonnes les unes que les autres. 
     Chacune a le pouvoir d'éveiller vos papilles et de ravir toute la famlle!<em></h6>
     </div>
-			
 
+<div style="display: flex;">
+     <form class="d-flex pr-4 mb-4" style="margin-right:10px;">
+      <ul class="navbar-nav mc-auto">
+					
+          <li class="nav-item dropdown">
+          <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Par Categorie</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ path('categorie_show', { id: 1 }) }}">Entrée</a>
+            <a class="dropdown-item" href="{{ path('categorie_show', { id: 2 }) }}">Plat</a>
+            <a class="dropdown-item" href="{{ path('categorie_show', { id: 3}) }}">Dessert</a>
+            <a class="dropdown-item" href="{{ path('categorie_show', { id: 4}) }}">Accompagment</a>
+            
+          </div>
+        </li>
+        </ul>
+      </form>
+
+      <form class="d-flex pr-4 mb-4">
+      <ul class="navbar-nav mc-auto">
+					
+          <li class="nav-item dropdown">
+          <a class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Par Saison</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ path('categorie_show', { id: 1 }) }}">Printemps</a>
+            <a class="dropdown-item" href="{{ path('categorie_show', { id: 2 }) }}">Ete</a>
+            <a class="dropdown-item" href="{{ path('categorie_show', { id: 3}) }}">Automne</a>
+            <a class="dropdown-item" href="{{ path('categorie_show', { id: 4}) }}">Hiver</a>
+            
+          </div>
+        </li>
+        </ul>
+      </form>
+
+      
+</div>
 			<div class="row row-cols-1 row-cols-md-3 g-4">
     {% for recette in recettes %}
     
