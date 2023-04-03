@@ -3,6 +3,7 @@
 namespace App\Form;
 
 
+use App\Entity\Saison;
 use App\Entity\Recette;
 use App\Entity\Categories;
 use App\Form\DetailsRecetteType;
@@ -118,6 +119,14 @@ class RecetteType extends AbstractType
 
                 ->add('categories', EntityType::class, [
                     'class' => Categories::class,
+                    
+                    'choice_label' => 'nom',
+                    
+                ])
+
+                
+                ->add('saison', EntityType::class, [
+                    'class' => Saison::class,
                     
                     'choice_label' => 'nom',
                     

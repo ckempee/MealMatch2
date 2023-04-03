@@ -75,14 +75,16 @@ class Recette
     #[ORM\ManyToMany(targetEntity: Regime::class, mappedBy: 'recette')]
     private Collection $regimes;
 
-    #[ORM\ManyToMany(targetEntity: Saison::class, mappedBy: 'recette')]
-    private Collection $saisons;
+   
 
     #[ORM\ManyToOne(inversedBy: 'recettes')]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'recettes')]
     private ?Categories $categories = null;
+
+    #[ORM\ManyToOne(inversedBy: 'recettes')]
+    private ?Saison $saison = null;
 
 
 
@@ -93,7 +95,7 @@ class Recette
         $this->updatedAt= new \DateTimeImmutable;
       
         $this->regimes = new ArrayCollection();
-        $this->saisons = new ArrayCollection();
+        
     }
 
     #[ORM\PrePersist()]
@@ -289,32 +291,7 @@ class Recette
         return $this;
     }
 
-    /**
-     * @return Collection<int, Saison>
-     */
-    public function getSaisons(): Collection
-    {
-        return $this->saisons;
-    }
-
-    public function addSaison(Saison $saison): self
-    {
-        if (!$this->saisons->contains($saison)) {
-            $this->saisons->add($saison);
-            $saison->addRecette($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSaison(Saison $saison): self
-    {
-        if ($this->saisons->removeElement($saison)) {
-            $saison->removeRecette($this);
-        }
-
-        return $this;
-    }
+    
 
     public function getUser(): ?User
     {
@@ -337,6 +314,18 @@ class Recette
     public function setCategories(?Categories $categories): self
     {
         $this->categories = $categories;
+
+        return $this;
+    }
+
+    public function getSaison(): ?Saison
+    {
+        return $this->saison;
+    }
+
+    public function setSaison(?Saison $saison): self
+    {
+        $this->saison = $saison;
 
         return $this;
     }

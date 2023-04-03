@@ -18,13 +18,17 @@ class Saison
     #[ORM\Column(length: 50)]
     private ?string $nom = null;
 
-    #[ORM\ManyToMany(targetEntity: Recette::class, inversedBy: 'saisons')]
-    private Collection $recette;
+    #[ORM\OneToMany(mappedBy: 'saison', targetEntity: Recette::class)]
+    private Collection $recettes;
 
     public function __construct()
     {
-        $this->recette = new ArrayCollection();
+        $this->recettes = new ArrayCollection();
     }
+
+    
+
+    
 
     public function getId(): ?int
     {
@@ -46,15 +50,16 @@ class Saison
     /**
      * @return Collection<int, Recette>
      */
-    public function getRecette(): Collection
+    public function getRecettes(): Collection
     {
-        return $this->recette;
+        return $this->recettes;
     }
 
     public function addRecette(Recette $recette): self
     {
-        if (!$this->recette->contains($recette)) {
-            $this->recette->add($recette);
+        if (!$this->recettes->contains($recette)) {
+            $this->recettes->add($recette);
+            $recette->setSaison($this);
         }
 
         return $this;
@@ -62,8 +67,14 @@ class Saison
 
     public function removeRecette(Recette $recette): self
     {
-        $this->recette->removeElement($recette);
+        if ($this->recettes->removeElement($recette)) {
+            // set the owning side to null (unless already changed)
+            if ($recette->getSaison() === $this) {
+                $recette->setSaison(null);
+            }
+        }
 
         return $this;
     }
+
 }
