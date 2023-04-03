@@ -2,8 +2,7 @@
 
 namespace App\Form;
 
-use Assert\Length;
-use Assert\NotBlank;
+
 use App\Entity\Recette;
 use App\Entity\Categories;
 use App\Form\DetailsRecetteType;
@@ -61,8 +60,8 @@ class RecetteType extends AbstractType
                     'class' => 'form-label mt-4'
                 ],
                 'constraints' => [
-                    new Assert\Length(['min' => 2, 'max' => 50]),
-                    new Assert\NotBlank()
+                    new Assert\Positive(),
+                    new Assert\LessThan(1000)
                 ]])
 
             ->add('tempsCuisson',  TextType::class, [
@@ -76,8 +75,9 @@ class RecetteType extends AbstractType
                     'class' => 'form-label mt-4'
                 ],
                 'constraints' => [
-                    new Assert\Length(['min' => 2, 'max' => 50]),
-                    new Assert\NotBlank()
+                    new Assert\Positive(),
+                    new Assert\LessThan(1000)
+                    
                 ]])
 
             ->add('nbPersonne',IntegerType::class, [
@@ -127,6 +127,7 @@ class RecetteType extends AbstractType
                     'entry_type' => DetailsRecetteType::class,
                     'entry_options' => ['label' => false],
                     'allow_add' => true,
+                    'allow_delete' => true,
                     'by_reference' => false,
                 ])
           
