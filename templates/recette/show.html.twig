@@ -118,10 +118,39 @@ body{
 
     </div>
       
-    </div>
-  </div>
 </div>
 
+
+ <div class="container w-100 px-4 py-4 mb-4">
+<h3>Commentaire</h3>
+<hr> 
+{% if app.user %}
+						<div class="comments__new mb-4">
+							<div class="w-full-width">
+								{{ form_start(form) }}
+								{{ form_label(form.commentaire, 'Nouveau commentaire', {'attr' : {'class' : 'form-label inline-block mb-2 text-gray-700'}}) }}
+								{{ form_widget(form.commentaire, {'attr': {'class': 'form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'}}) }}
+								
+                <button>Poster mon commentaire
+                </button>
+
+								{{ form_end(form) }}
+							</div>
+						</div>
+{% endif %}
+
+          
+
+{% for commentaire in recette.commentaire %}
+		{% include 'partials/commentaire.html.twig' %}
+{% endfor %}
+
+            </div>
+
+        </div>
+
+
 </div>
-</div>
+
+
 {% endblock %}

@@ -86,6 +86,9 @@ class Recette
     #[ORM\ManyToOne(inversedBy: 'recettes')]
     private ?Saison $saison = null;
 
+    #[ORM\OneToMany(mappedBy: 'recette', targetEntity: Commentaire::class, orphanRemoval: true)]
+    private Collection $commentaire;
+
 
 
     public function __construct()
@@ -95,6 +98,7 @@ class Recette
         $this->updatedAt= new \DateTimeImmutable;
       
         $this->regimes = new ArrayCollection();
+        $this->commentaire = new ArrayCollection();
         
     }
 
@@ -326,6 +330,36 @@ class Recette
     public function setSaison(?Saison $saison): self
     {
         $this->saison = $saison;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getCommentaire(): Collection
+    {
+        return $this->commentaire;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaire->contains($commentaire)) {
+            $this->commentaire->add($commentaire);
+            $commentaire->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaire->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getRecette() === $this) {
+                $commentaire->setRecette(null);
+            }
+        }
 
         return $this;
     }

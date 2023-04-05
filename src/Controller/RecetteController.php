@@ -4,9 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Recette;
 use App\Form\RecetteType;
+use App\Entity\Commentaire;
 use App\Entity\Ingredients;
+use App\Form\CommentaireType;
 use App\Entity\DetailsRecette;
-
 use App\Form\SearchIngredientType;
 use App\Repository\RecetteRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -194,13 +195,33 @@ class RecetteController extends AbstractController
     }
 
     #[Route('/recette/{id}', 'recette_show', methods: ['GET', 'POST'])]
-    public function show(Recette $recette): Response
+    public function show(Recette $recette, Request $request, EntityManagerInterface $em): Response
     {
+        $commentaire = new Commentaire();
+        $commentaire->setRecette($recette);
+        if($this->getUser()) {
+            $commentaire->setUser($this->getUser());
+        }
+
+
+        $form=$this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em->persist($commentaire);
+            $em->flush();
+
+            $this->addFlash('success', 'Votre commentaire a bien été enregistré. Il sera soumis à modération dans les plus brefs délais.');
+
+            return $this->redirectToRoute('recette_show',['id' => $recette->getId()]);
+        }
+
         $details=$recette->getDetails();
         return $this->render(
             'recette/show.html.twig',
             ['recette' => $recette,
-            'details'=>$details]
+            'details'=>$details,
+            'form'=>$form->createView()]
         );
     }
 }
