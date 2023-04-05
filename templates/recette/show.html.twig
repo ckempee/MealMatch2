@@ -70,7 +70,7 @@ body{
     <div class="d-flex justify-content-between align-items-center px-0">
       <h4 class="mx-4 my-0 quantity mx-2" style="padding-left:10px;">{{ recette.dureePreparation }} min.</h4>
       <h4 class="mx-0 my-0 quantity">{{ recette.tempsCuisson }} min.</h4>
-      <h4 class="mx-4 my-0 quantity mx-2 style="padding-right:30px;">{{ recette.nbPersonne }} pers.</h4>
+      <h4 class="mx-4 my-0 quantity mx-2" style="padding-right:30px;">{{ recette.nbPersonne }} pers.</h4>
     </div>
   </div>
 </div>
@@ -124,17 +124,34 @@ body{
  <div class="container w-100 px-4 py-4 mb-4">
 <h3>Commentaire</h3>
 <hr> 
+
+
 {% if app.user %}
 						<div class="comments__new mb-4">
 							<div class="w-full-width">
 								{{ form_start(form) }}
-								{{ form_label(form.commentaire, 'Nouveau commentaire', {'attr' : {'class' : 'form-label inline-block mb-2 text-gray-700'}}) }}
-								{{ form_widget(form.commentaire, {'attr': {'class': 'form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'}}) }}
-								
-                <button>Poster mon commentaire
-                </button>
 
-								{{ form_end(form) }}
+
+
+<div class="form-group">
+    {{ form_label(form.note) }}
+    <div class="stars">
+        <i class="star" data-note="1">&#9733;</i>
+        <i class="star" data-note="2">&#9733;</i>
+        <i class="star" data-note="3">&#9733;</i>
+        <i class="star" data-note="4">&#9733;</i>
+        <i class="star" data-note="5">&#9733;</i>
+    </div>
+    <h6 id="note-selected"></h6>
+    {{ form_widget(form.note, {'attr': {'class': 'form-control'}}) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.commentaire, 'Votre commentaire') }}
+    {{ form_widget(form.commentaire, {'attr': {'class': 'form-control'}}) }}
+</div>
+<button type="submit" class="btn btn-primary">Envoyer</button>
+
+{{ form_end(form) }}
 							</div>
 						</div>
 {% endif %}
@@ -152,5 +169,70 @@ body{
 
 </div>
 
-
+{% block customJS %}
+<script>
+    // Récupération des étoiles
+    const stars = document.querySelectorAll('.star');
+    
+    // Ajout des événements
+    stars.forEach(star => {
+        star.addEventListener('mouseover', selectStars);
+        star.addEventListener('mouseleave', unselectStars);
+        star.addEventListener('click', activeSelect);
+    });
+    
+    // Fonction pour afficher les étoiles sélectionnées au survol
+    function selectStars(e) {
+        const data = e.target;
+        const etoiles = priviousSiblings(data);
+        etoiles.forEach(etoile => {
+            etoile.classList.add('hover');
+        });
+    }
+    
+    // Fonction pour masquer les étoiles au survol
+    function unselectStars(e) {
+        const data = e.target;
+        const etoiles = priviousSiblings(data);
+        etoiles.forEach(etoile => {
+            etoile.classList.remove('hover');
+        });
+        // Enlever le nombre d'étoiles sélectionnées
+        document.querySelector('#note-selected').innerHTML = "";
+    }
+    
+    // Fonction pour activer les étoiles au clic et mettre à jour la note
+    function activeSelect(e) {
+        // Récupération de la note
+        const note = e.target.dataset.note;
+        
+        // Mise à jour du champ caché "note"
+        const noteField = document.querySelector('#commentaire_note');
+        noteField.value = note;
+        
+        // Affichage de la note sélectionnée
+        const noteSelected = document.querySelector('#note-selected');
+        noteSelected.innerHTML = `Note : ${note} étoile(s)`;
+      
+        // Désactivation des événements au survol et au clic
+        stars.forEach(star => {
+            star.removeEventListener('mouseover', selectStars);
+            star.removeEventListener('mouseleave', unselectStars);
+            star.removeEventListener('click', activeSelect);
+        });
+    }
+    
+    // Fonction pour récupérer les étoiles précédentes d'un élément HTML
+    function priviousSiblings(data) {
+        let values = [data];
+        while (data.previousSibling) {
+            data = data.previousSibling;
+            if (data.nodeName === 'I') {
+                values.push(data);
+            }
+        }
+        return values.reverse();
+    }
+</script>
+{% endblock %}
 {% endblock %}

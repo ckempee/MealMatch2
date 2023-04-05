@@ -6,6 +6,15 @@
           
         </div>
         <div class="md:ml-6">
+          <div class="etoiles">
+            {% for i in range(1, 5) %}
+                {% if commentaire.note >= i %}
+                  <i class="bi bi-star-fill"></i>
+                {% else %}
+                  <i class="bi bi-star"></i>
+                {% endif %}
+            {% endfor %}
+        </div>
             <p class="text-gray-500 font-light mb-6">
                 {{ commentaire.commentaire|raw }}
             </p>
