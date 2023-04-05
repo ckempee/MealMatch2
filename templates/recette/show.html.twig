@@ -9,8 +9,8 @@
 {{parent()}}
 <style>
 body{
-     background-color: white;
-    
+  
+    background-image: url('https://img.freepik.com/free-photo/close-up-black-marble-textured-background_53876-148094.jpg?w=1060&t=st=1680451606~exp=1680452206~hmac=a02567c38143b7eee8d53d2d2655424f4cb2f1824e5dcf6b985598d181a7bcbd')
         
 }
 .bg-image{
@@ -32,13 +32,30 @@ body{
        .quantity {
     font-size: 1em;
   }
+
+#image{
+  padding-left:20px;
+  margin-bottom:20px;
+  padding-left:20px;
+  max-width:600px;
+  max-height: auto;
+  
+}
+
+
+  .left{
+    width:45%;
+    text-align:left;
+   
+
+  }
 </style>
     </style>
 {% endblock %}
 
 {% block body %}
 
-<div class="bg-image pt-4 " style="background-image: url('https://img.freepik.com/free-photo/close-up-black-marble-textured-background_53876-148094.jpg?w=1060&t=st=1680451606~exp=1680452206~hmac=a02567c38143b7eee8d53d2d2655424f4cb2f1824e5dcf6b985598d181a7bcbd')">
+<div class="bg-image pt-4 ">
 
 
 <div class="container mt-3 p-1 container1">
@@ -70,31 +87,39 @@ body{
         <h6 style="margin-left: 10px;">Créee le:{{ recette.createdAt| date('d/m/Y')}}</h6>
         <h6 style="margin-left: 10px;">Par: {{recette.user.nom}} {{recette.user.prenom}}</h6>
       </div>
-      <div class="row mt-4">
-        <div class="col-md-12 text-center">
-          <div class="recipe__image mx-auto">
-            <img style="min-width: 700px;" src="{{ vich_uploader_asset(recette, 'imageFile') }}">
+     
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="col-md-12 text-center">
+          <div class="recipe__image mx-auto float-md-end ml-4">
+            <img src="{{ vich_uploader_asset(recette, 'imageFile') }}" id="image">
           </div>
-        </div>
       </div>
-      <div class="row mt-3">
-        <div class="col-md-8 offset-md-2">
-          <div class="recipe__details text-left">
-            <h4>Ingredients:</h4>
-            <ul>
-              {% for detail in details %}
-                <li>{{detail.ingredients}} {{detail.quantite}} {{ detail.mesure}}</li>
-              {% endfor %}
-            </ul>
-            <div class="mt-4">
-              {{ recette.description|raw }}
-            </div>
-          </div>
+    </div>
+    <div class="col-md-6 left">
+      <h4>Ingredients:</h4>
+          <ul class="list-unstyled">
+            {% for detail in details %}
+              <li class="text-left">{{detail.ingredients}} {{detail.quantite}} {{ detail.mesure}}</li>
+            {% endfor %}
+          </ul>
+          <div class="p-2 d-flex flex-column">
+          <p class="text-left">{{ recette.description|raw }}<p>
         </div>
-      </div>
+    </div>
+
+      
+
+ 
+  </div>
+</div>
+
+    </div>
+      
     </div>
   </div>
 </div>
 
+</div>
 </div>
 {% endblock %}
