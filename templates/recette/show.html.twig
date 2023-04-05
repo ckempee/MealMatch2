@@ -82,11 +82,7 @@ body{
     <div class="col-md-12 text-center">
       <h1>{{ recette.titre }}</h1>
       <hr>
-      <div class="d-flex justify-content-center">
-        <span class="badge bg-success" style="margin-right: 10px;">{{recette.categories}}</span>
-        <h6 style="margin-left: 10px;">Créee le:{{ recette.createdAt| date('d/m/Y')}}</h6>
-        <h6 style="margin-left: 10px;">Par: {{recette.user.nom}} {{recette.user.prenom}}</h6>
-      </div>
+      
      
   <div class="row mt-4">
     <div class="col-md-6">
@@ -97,17 +93,23 @@ body{
       </div>
     </div>
     <div class="col-md-6 left">
-      <h4>Ingredients:</h4>
+      <h4 style="background-color:#D3D3D3">Ingredients:</h4>
           <ul class="list-unstyled">
             {% for detail in details %}
               <li class="text-left">{{detail.ingredients}} {{detail.quantite}} {{ detail.mesure}}</li>
             {% endfor %}
           </ul>
           <div class="p-2 d-flex flex-column">
+          <h4 style="background-color:#D3D3D3">Etapes:</h4>
           <p class="text-left">{{ recette.description|raw }}<p>
         </div>
     </div>
-
+<div class="d-flex justify-content-center mb-4">
+      <h6>Saison: <span class="badge bg-success" style="margin-right: 10px;">{{recette.saison}}</span></h6>
+        <h6> Catégorie: <span class="badge bg-success" style="margin-right: 10px;"> {{recette.categories}}</span></h6>
+        <h6 style="margin-left: 10px;">Créee le:{{ recette.createdAt| date('d/m/Y')}}</h6>
+        <h6 style="margin-left: 10px;">Par: {{recette.user.nom}} {{recette.user.prenom}}</h6>
+      </div>
       
 
  

@@ -99,8 +99,9 @@
   </div>
     {% endfor %}
   </div>
-
-  <a href="{{ path('recette_index_public') }}" class="mb-4"> Voir toutes les recettes</a>
+<div class="text-right">
+  <a href="{{ path('recette_index_public') }}" class="mb-4" style="position:right"> Voir toutes les recettes</a>
+</div>
 </div>
 
 <!--afficher par saison-->
@@ -114,19 +115,19 @@
       </a>
     </div>
     <div class="col-md-3 col-lg-2 ">
-      <a href="#" class="season-link">
+      <a href="{{path('saison_show', { id: 2 }) }}" class="season-link">
         <img src="https://img.freepik.com/free-photo/tree_1127-3028.jpg?w=1060&t=st=1680534797~exp=1680535397~hmac=b5c214eed567597d785e18cede1739572e0ec44f56ff203fc4f9255d85ee4f5b" class="img-fluid rounded-circle season-image" alt="Summer">
         <div class="season-name">Ete</div>
       </a>
     </div>
     <div class="col-md-3 col-lg-2">
-      <a href="#" class="season-link">
+      <a href="{{path('saison_show', { id: 3 }) }}" class="season-link">
         <img src="https://img.freepik.com/free-photo/birch-forest-sunny-afternoon-while-autumn-season_146671-19510.jpg?w=1060&t=st=1680534711~exp=1680535311~hmac=44a82a419648643f1f0cc15e7101011bad8c707ceb788bf732dd2b42825983c7" class="img-fluid rounded-circle season-image" alt="Fall">
         <div class="season-name">Autumn</div>
       </a>
     </div>
     <div class="col-md-3 col-lg-2">
-      <a href="#" class="season-link">
+      <a href="{{path('saison_show', { id: 4 }) }}" class="season-link">
         <img src="https://img.freepik.com/free-photo/magical-switzerland-winter-lake-center-alps-surrounded-by-forest-covered-by-snow_181624-29283.jpg?w=1060&t=st=1680534691~exp=1680535291~hmac=3502335f07790ac61b98c065218e82821f0bcec054c2624bd58bc711fccc27a6" class="img-fluid rounded-circle season-image" alt="Winter">
         <div class="season-name">Hiver</div>
       </a>

@@ -134,8 +134,11 @@ class IngredientsFixtures extends Fixture
             "pâtes",
             "quinoa",
             "pesto",
-            "pesto rosso");
-            
+            "pesto rosso", 
+            'nouille',
+            'bouillon de légume',
+            'vermicelle de riz');
+
         foreach ($ingredients as $ingredientName) {
             $ingredient = new Ingredients();
             $ingredient->setNom($ingredientName);
