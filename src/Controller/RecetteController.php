@@ -211,7 +211,7 @@ class RecetteController extends AbstractController
             $em->persist($commentaire);
             $em->flush();
 
-            $this->addFlash('success', 'Votre commentaire a bien été enregistré. Il sera soumis à modération dans les plus brefs délais.');
+            
 
             return $this->redirectToRoute('recette_show',['id' => $recette->getId()]);
         }
